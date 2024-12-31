@@ -121,7 +121,6 @@ class _HomePageState extends State<HomePage> {
                   border: OutlineInputBorder()),
               onChanged: (textEntered) {
                 searchResult(textEntered);
-
                 setState(() {
                   _searchController.text = textEntered;
                 });
