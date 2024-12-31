@@ -1,0 +1,41 @@
+// Root-level build.gradle file (android/build.gradle)
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        // Perbarui plugin Gradle Android ke versi terbaru yang mendukung SDK 34
+        classpath 'com.android.tools.build:gradle:8.0.0' // atau versi terbaru yang mendukung SDK 34
+
+        // Flutter plugin
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.10'  // Sesuaikan dengan versi Kotlin yang digunakan
+
+        // Google Services plugin (untuk Firebase)
+        classpath 'com.google.gms:google-services:4.3.15'  // Perbarui ke versi terbaru
+    }
+}
+
+
+allprojects {
+    repositories {
+        google()  // Pastikan repositori Google ada di sini
+        mavenCentral()
+    }
+}
+
+rootProject.buildDir = "../build"  // Tentukan direktori build untuk root project
+
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"  // Tentukan direktori build untuk subprojects
+}
+
+subprojects {
+    project.evaluationDependsOn(":app")  // Tentukan ketergantungan evaluasi untuk subprojects
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir  // Tentukan task 'clean' untuk menghapus direktori build
+}
